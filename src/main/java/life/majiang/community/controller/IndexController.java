@@ -2,8 +2,8 @@ package life.majiang.community.controller;
 
 import life.majiang.community.cache.HotTagCache;
 import life.majiang.community.dto.PaginationDTO;
-import life.majiang.community.service.NavService;
 import life.majiang.community.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,7 +30,14 @@ public class IndexController {
                         @RequestParam(name = "size", defaultValue = "10") Integer size,
                         @RequestParam(name = "search", required = false) String search,
                         @RequestParam(name = "tag", required = false) String tag,
-                        @RequestParam(name = "sort", required = false) String sort) {
+                        @RequestParam(name = "sort", required = false) String sort,
+                        @RequestParam(name = "redirect", required = false) String redirect) {
+
+
+        if (StringUtils.isNotBlank(redirect)) {
+            return "redirect:" + redirect;
+        }
+
         PaginationDTO pagination = questionService.list(search, tag, sort, page, size);
         List<String> tags = hotTagCache.getHots();
         model.addAttribute("pagination", pagination);
