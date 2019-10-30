@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by codedrinker on 2019/5/14.
@@ -42,7 +43,7 @@ public class PaginationDTO<T> {
         }
 
         // 是否展示下一页
-        if (page == totalPage) {
+        if (Objects.equals(page, totalPage)) {
             showNext = false;
         } else {
             showNext = true;

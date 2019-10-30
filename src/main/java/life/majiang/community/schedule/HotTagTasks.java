@@ -33,7 +33,7 @@ public class HotTagTasks {
         log.info("hotTagSchedule start {}", new Date());
         List<Question> list = new ArrayList<>();
 
-        Map<String, Integer> priorities = new HashMap<>();
+        Map<String, Integer> priorities = new HashMap<>(16);
         while (offset == 0 || list.size() == limit) {
             list = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, limit));
             for (Question question : list) {
